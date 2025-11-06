@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - 'feature/**'  # Use ** for any feature branch
+      - feature  # Use ** for any feature branch
 
 jobs:
   production-deploy:
