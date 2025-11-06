@@ -4,24 +4,14 @@ on:
   push:
     branches:
       - main
-      - feature  # Use ** for any feature branch
+      - feature
 
 jobs:
   production-deploy:
-    if: contains(github.ref, 'feature') || github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/feature'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '14'
-          
-      - name: Debug branch info
-        run: |
-          echo "Current ref: ${{ github.ref }}"
-          echo "Ref name: ${{ github.ref_name }}"
-          echo "Head ref: ${{ github.head_ref }}"
-          echo "Base ref: ${{ github.base_ref }}"
